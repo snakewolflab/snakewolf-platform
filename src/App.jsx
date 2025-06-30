@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'; // トップレベルでインポート済み
+import { AuthPage } from './pages/AuthPage';
+import { PrivateRoute } from './components/PrivateRoute';
+import { DashboardPage } from './pages/DashboardPage';
+import { ProfilePage } from './pages/ProfilePage';
+import { PlatformPage } from './pages/PlatformPage';
+import { SettingsPage } from './pages/SettingPage';
+import { QAHCPage } from './pages/QAHCPage';
+import { AdminPage } from './pages/AdminPage';
+import { DeveloperPage } from './pages/DeveloperPage';
+import { CreatorPage } from './pages/CreatorPage';
+import { SupportPage } from './pages/SupportPage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
-  const [count, setCount] = useState(0)
+    const path = window.location.pathname;
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    let content;
+    switch (path) {
+        case '/auth':
+            content = <AuthPage />;
+            break;
+        case '/dashboard':
+            content = <PrivateRoute><DashboardPage /></PrivateRoute>;
+            break;
+        case '/profile':
+            content = <PrivateRoute><ProfilePage /></PrivateRoute>;
+            break;
+        case '/platform':
+            content = <PrivateRoute><PlatformPage /></PrivateRoute>;
+            break;
+        case '/settings':
+            content = <PrivateRoute><SettingsPage /></PrivateRoute>;
+            break;
+        case '/qa-help':
+            content = <PrivateRoute><QAHCPage /></PrivateRoute>;
+            break;
+        case '/admin':
+             content = <PrivateRoute><AdminPage /></PrivateRoute>;
+            break;
+        case '/developer':
+            content = <PrivateRoute><DeveloperPage /></PrivateRoute>;
+            break;
+        case '/creator':
+            content = <PrivateRoute><CreatorPage /></PrivateRoute>;
+            break;
+        case '/support':
+            content = <PrivateRoute><SupportPage /></PrivateRoute>;
+            break;
+        default:
+            content = <NotFoundPage />;
+            break;
+    }
+
+    return (
+        <AuthProvider>
+            {content}
+        </AuthProvider>
+    );
 }
 
-export default App
+// Appコンポーネントをデフォルトエクスポート
+export default App;
