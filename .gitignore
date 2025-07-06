@@ -25,4 +25,4 @@ node
 *.sw?
 
 # Google Firebase
-firebase.exe
+firebase-tools.exe
