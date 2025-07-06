@@ -26,3 +26,6 @@ node
 
 # Google Firebase
 firebase-tools.exe
+.firebaserc
+firebase.json
+deploy.bat
