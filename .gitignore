@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 node
+firebase-tools-instant-win.exe
 *.local
 
 # Editor directories and files
